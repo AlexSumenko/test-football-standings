@@ -1,0 +1,17 @@
+.Homepage-cards {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top: 40vh;
+  justify-content: space-evenly;
+}
+
+.Homepage-card {
+  width: 200px;
+  height: 200px;
+
+  &:hover {
+    background-color: gainsboro;
+    cursor: pointer;
+  }
+}

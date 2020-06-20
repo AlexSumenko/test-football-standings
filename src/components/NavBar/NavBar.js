@@ -12,8 +12,8 @@ const navBar = () => {
           <HomeIcon />
         </Link>
         <NavItem to="/competitions">Competitions</NavItem>
-        <NavItem to="/competitions">Results</NavItem>
-        <NavItem to="/competitions">Upcoming matches</NavItem>
+        <NavItem to="/results">Results</NavItem>
+        <NavItem to="/fixtures">Upcoming matches</NavItem>
       </div>
     </div>
   );
