@@ -2,11 +2,9 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import './NavItem.scss';
-
 const navItem = props => {
   return (
-    <Link className="NavItem" to={props.path}>
+    <Link className="nav-item nav-link" to={props.path}>
       {props.children}
     </Link>
   );
