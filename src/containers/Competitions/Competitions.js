@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { getData } from '../../utils/fetch';
+import { getDataWithSubscriptionPlan } from '../../utils/fetch';
 
 import CompetitionsGrid from '../../components/Tables/CompetitionsGrid/CompetitionsGrid';
 
 const Competitions = () => {
   const [competitions, setCompetitions] = useState([]);
   useEffect(() => {
-    getData('competitions/')
+    getDataWithSubscriptionPlan('competitions/')
       .then(res => res.json())
       .then(res => {
-        console.log(res.competitions);
         setCompetitions(res.competitions);
       }, []);
   });

@@ -7,3 +7,11 @@ export const getData = url => {
     },
   });
 };
+
+export const getDataWithSubscriptionPlan = url => {
+  return fetch(`${API_CONFIG.baseUrl}${url}?plan=${API_CONFIG.plan}`, {
+    headers: {
+      'X-Auth-Token': API_CONFIG.token,
+    },
+  });
+};
