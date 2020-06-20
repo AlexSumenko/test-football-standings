@@ -1,9 +1,15 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import TeamLogo from './TeamLogo';
+import './CompetitionTable.scss';
 
 const competitionsTable = props => {
+  const teamClickHandler = teamId => {
+    props.history.push(`/teams/${teamId}`);
+  };
+
   let competitionStandings = <div className="text-info">Loading table...</div>;
   if (props.standings && props.standings.length > 0) {
     competitionStandings = (
@@ -28,7 +34,11 @@ const competitionsTable = props => {
         <tbody>
           {props.standings.map(team => {
             return (
-              <tr key={team.team.id}>
+              <tr
+                className="competition-table__tr"
+                key={team.team.id}
+                onClick={() => teamClickHandler(team.team.id)}
+              >
                 <td>{team.position}</td>
                 <td>
                   <TeamLogo
@@ -60,4 +70,4 @@ competitionsTable.propTypes = {
   competitions: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default competitionsTable;
+export default withRouter(competitionsTable);
