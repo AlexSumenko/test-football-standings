@@ -6,14 +6,14 @@ import { HomeIcon } from './NavItem/HomeIcon';
 
 const navBar = () => {
   return (
-    <div className="navbar navbar-expand-sm bg-light">
+    <div className="navbar navbar-expand-sm bg-dark">
       <div className="navbar-nav">
         <Link to="/">
           <HomeIcon />
         </Link>
-        <NavItem to="/competitions">Competitions</NavItem>
-        <NavItem to="/results">Results</NavItem>
-        <NavItem to="/fixtures">Upcoming matches</NavItem>
+        <NavItem path="/competitions">Competitions</NavItem>
+        <NavItem path="/results">Results</NavItem>
+        <NavItem path="/fixtures">Upcoming matches</NavItem>
       </div>
     </div>
   );
