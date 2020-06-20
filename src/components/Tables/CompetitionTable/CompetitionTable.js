@@ -17,7 +17,11 @@ const competitionsTable = props => {
             <th>Drawn</th>
             <th>Lost</th>
             <th>Goals</th>
-            <th>Goals Difference</th>
+            <th>
+              Goals
+              <br />
+              Difference
+            </th>
             <th>Points</th>
           </tr>
         </thead>
