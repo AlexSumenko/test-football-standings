@@ -6,7 +6,10 @@ import { HomeIcon } from './NavItem/HomeIcon';
 
 const navBar = () => {
   return (
-    <div className="navbar navbar-expand-sm bg-dark">
+    <div
+      className="navbar navbar-expand-sm bg-dark"
+      style={{ marginBottom: '30px' }}
+    >
       <div className="navbar-nav">
         <Link to="/">
           <HomeIcon />

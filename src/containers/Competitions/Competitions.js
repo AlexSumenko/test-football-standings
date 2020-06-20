@@ -10,8 +10,8 @@ const Competitions = () => {
       .then(res => res.json())
       .then(res => {
         setCompetitions(res.competitions);
-      }, []);
-  });
+      });
+  }, []);
   return (
     <div className="container">
       <CompetitionsGrid competitions={competitions} />
