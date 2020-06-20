@@ -12,7 +12,8 @@ const Competition = props => {
       .then(res => res.json())
       .then(res => {
         setCompetitionStandings(res.standings[0].table);
-      });
+      })
+      .catch(err => console.log(err));
   }, [competitionId]);
   return (
     <div className="container">

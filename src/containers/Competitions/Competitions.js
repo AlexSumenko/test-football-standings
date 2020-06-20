@@ -10,7 +10,8 @@ const Competitions = () => {
       .then(res => res.json())
       .then(res => {
         setCompetitions(res.competitions);
-      });
+      })
+      .catch(err => console.log(err));
   }, []);
   return (
     <div className="container">
