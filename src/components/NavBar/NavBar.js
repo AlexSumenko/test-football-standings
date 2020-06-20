@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import NavItem from './NavItem/NavItem';
-import { HomeIcon } from './NavItem/HomeIcon';
+import { HomeIcon } from './HomeIcon';
 
 const navBar = () => {
   return (
@@ -14,9 +13,6 @@ const navBar = () => {
         <Link to="/">
           <HomeIcon />
         </Link>
-        <NavItem path="/competitions">Competitions</NavItem>
-        <NavItem path="/results">Results</NavItem>
-        <NavItem path="/fixtures">Upcoming matches</NavItem>
       </div>
     </nav>
   );
