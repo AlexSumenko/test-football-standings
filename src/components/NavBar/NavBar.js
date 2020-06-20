@@ -6,7 +6,7 @@ import { HomeIcon } from './NavItem/HomeIcon';
 
 const navBar = () => {
   return (
-    <div
+    <nav
       className="navbar navbar-expand-sm bg-dark"
       style={{ marginBottom: '30px' }}
     >
@@ -18,7 +18,7 @@ const navBar = () => {
         <NavItem path="/results">Results</NavItem>
         <NavItem path="/fixtures">Upcoming matches</NavItem>
       </div>
-    </div>
+    </nav>
   );
 };
 

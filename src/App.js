@@ -12,7 +12,7 @@ const App = () => {
     <div className="App">
       <NavBar />
       <Switch>
-        <Route path="/competitions/2021" component={Competition} />
+        <Route path="/competitions/:id" component={Competition} />
         <Route path="/competitions" component={Competitions} />
         <Route path="/" exact component={Homepage} />
       </Switch>
