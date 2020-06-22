@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 
 import TeamLogo from '../../components/Tables/CompetitionTable/TeamLogo';
 import { getData } from '../../utils/fetch';

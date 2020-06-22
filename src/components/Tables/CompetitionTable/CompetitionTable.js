@@ -13,7 +13,7 @@ const competitionsTable = props => {
   let competitionStandings = <div className="text-info">Loading table...</div>;
   if (props.standings && props.standings.length > 0) {
     competitionStandings = (
-      <table className="table-striped table-hover">
+      <table className="table table-striped table-hover">
         <thead>
           <tr>
             <th>Position</th>

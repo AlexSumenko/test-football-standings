@@ -17,7 +17,11 @@ const Competition = props => {
   }, [competitionId]);
   return (
     <div className="container">
-      <CompetitionTable standings={competitionStandings} />
+      <div className="row">
+        <div className="col-sm-12">
+          <CompetitionTable standings={competitionStandings} />
+        </div>
+      </div>
     </div>
   );
 };
