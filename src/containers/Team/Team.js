@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+import SearchField from '../../components/SearchField/SearchField';
 import TeamLogo from '../../components/Tables/CompetitionTable/TeamLogo';
 import { getData } from '../../utils/fetch';
 
 const Team = props => {
   const [team, setTeam] = useState(null);
+  const [searchValue, setSearchValue] = useState(null);
   const teamId = props.match.params.id;
   useEffect(() => {
     getData(`teams/${teamId}`)
@@ -47,6 +49,11 @@ const Team = props => {
         <div className="col-sm-4">{teamInfo}</div>
         <div className="col-sm-8">
           <h3>Players</h3>
+          <SearchField
+            type="text"
+            placeholder="Search Players"
+            value={searchValue}
+          />
         </div>
       </div>
     </div>
