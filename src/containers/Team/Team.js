@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
 import SearchField from '../../components/SearchField/SearchField';
+import TeamPlayersTable from '../../components/Tables/TeamPlayersTable/TeamPlayersTable';
 import TeamLogo from '../../components/Tables/CompetitionTable/TeamLogo';
 import { getData } from '../../utils/fetch';
 
 const Team = props => {
   const [team, setTeam] = useState(null);
-  const [searchValue, setSearchValue] = useState(null);
+  const [searchValue, setSearchValue] = useState('');
   const teamId = props.match.params.id;
   useEffect(() => {
     getData(`teams/${teamId}`)
@@ -43,6 +44,15 @@ const Team = props => {
     );
   }
 
+  let squadInfo = <div className="text-info">Loading players...</div>;
+  if (team) {
+    squadInfo = <TeamPlayersTable players={team.squad} />;
+  }
+
+  const playerSearchHandle = event => {
+    setSearchValue(event.target.value);
+  };
+
   return (
     <div className="Container">
       <div className="row">
@@ -53,7 +63,9 @@ const Team = props => {
             type="text"
             placeholder="Search Players"
             value={searchValue}
+            onChange={event => playerSearchHandle(event)}
           />
+          {squadInfo}
         </div>
       </div>
     </div>
