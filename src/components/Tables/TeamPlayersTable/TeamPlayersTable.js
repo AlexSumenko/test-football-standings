@@ -15,7 +15,7 @@ const teamPlayersTable = props => {
         <thead>
           <tr>
             <th>Name</th>
-            <th>Position</th>
+            <th>Role</th>
             <th>Age</th>
             <th>Nationality</th>
           </tr>
@@ -29,7 +29,7 @@ const teamPlayersTable = props => {
                 onClick={() => playerClickHandler(player.id)}
               >
                 <td>{player.name}</td>
-                <td>{player.position}</td>
+                <td>{player.position ? player.position : player.role}</td>
                 <td>{player.nationality}</td>
                 <td>{player.dateOfBirth}</td>
               </tr>
