@@ -8,15 +8,23 @@ import { getData } from '../../utils/fetch';
 const Team = props => {
   const [team, setTeam] = useState(null);
   const [searchValue, setSearchValue] = useState('');
+  const [playersList, setPlayersList] = useState([]);
   const teamId = props.match.params.id;
   useEffect(() => {
     getData(`teams/${teamId}`)
       .then(res => res.json())
       .then(res => {
         setTeam(res);
+        setPlayersList(res.squad);
       })
       .catch(err => console.log(err));
   }, [teamId]);
+
+  useEffect(() => {
+    setPlayersList(
+      playersList.filter(player => player.name.includes(searchValue))
+    );
+  }, [searchValue]);
 
   let teamInfo = <h3>Team info</h3>;
   if (team) {
@@ -45,25 +53,20 @@ const Team = props => {
   }
 
   let squadInfo = <div className="text-info">Loading players...</div>;
-  if (team) {
-    squadInfo = <TeamPlayersTable players={team.squad} />;
+  if (playersList) {
+    squadInfo = <TeamPlayersTable players={playersList} />;
   }
-
-  const playerSearchHandle = event => {
-    setSearchValue(event.target.value);
-  };
-
   return (
     <div className="Container">
       <div className="row">
         <div className="col-sm-4">{teamInfo}</div>
-        <div className="col-sm-8">
+        <div className="col-sm-7">
           <h3>Players</h3>
           <SearchField
             type="text"
             placeholder="Search Players"
             value={searchValue}
-            onChange={event => playerSearchHandle(event)}
+            changed={event => setSearchValue(event.target.value)}
           />
           {squadInfo}
         </div>

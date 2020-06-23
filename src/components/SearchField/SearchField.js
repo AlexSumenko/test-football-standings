@@ -9,6 +9,7 @@ const searchField = props => {
         type={props.type}
         placeholder={props.placeholder}
         value={props.value}
+        onChange={props.changed}
       />
     </div>
   );
@@ -18,6 +19,7 @@ searchField.propTypes = {
   type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string,
+  changed: PropTypes.func,
 };
 
 searchField.defaultProps = {
