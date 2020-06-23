@@ -28,4 +28,4 @@ searchField.defaultProps = {
   value: '',
 };
 
-export default searchField;
+export default React.memo(searchField);

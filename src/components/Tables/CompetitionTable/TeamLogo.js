@@ -24,4 +24,4 @@ teamLogo.defaultProps = {
   height: '16px',
 };
 
-export default teamLogo;
+export default React.memo(teamLogo);

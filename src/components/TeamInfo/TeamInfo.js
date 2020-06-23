@@ -36,4 +36,4 @@ teamInfo.propTypes = {
   teamWebsite: PropTypes.string,
 };
 
-export default teamInfo;
+export default React.memo(teamInfo);

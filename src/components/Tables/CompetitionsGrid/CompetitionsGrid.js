@@ -23,4 +23,4 @@ competitionsGrid.propTypes = {
   competitions: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default competitionsGrid;
+export default React.memo(competitionsGrid);

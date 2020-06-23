@@ -70,4 +70,4 @@ competitionsTable.propTypes = {
   competitions: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default withRouter(competitionsTable);
+export default React.memo(withRouter(competitionsTable));

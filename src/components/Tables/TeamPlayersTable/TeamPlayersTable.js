@@ -37,4 +37,4 @@ teamPlayersTable.propTypes = {
   players: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default teamPlayersTable;
+export default React.memo(teamPlayersTable);
