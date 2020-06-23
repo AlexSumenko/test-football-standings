@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { calculateAgeInYears } from '../../../utils/helpers';
 
 import './TeamPlayersTable.scss';
 
@@ -30,8 +31,8 @@ const teamPlayersTable = props => {
               >
                 <td>{player.name}</td>
                 <td>{player.position ? player.position : player.role}</td>
+                <td>{calculateAgeInYears(player.dateOfBirth)}</td>
                 <td>{player.nationality}</td>
-                <td>{player.dateOfBirth}</td>
               </tr>
             );
           })}
