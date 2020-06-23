@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { calculateAgeInYears } from '../../../utils/helpers';
 
@@ -38,4 +37,4 @@ teamPlayersTable.propTypes = {
   players: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default withRouter(teamPlayersTable);
+export default teamPlayersTable;

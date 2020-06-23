@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import SearchField from '../../components/SearchField/SearchField';
 import TeamPlayersTable from '../../components/Tables/TeamPlayersTable/TeamPlayersTable';
-import TeamLogo from '../../components/Tables/CompetitionTable/TeamLogo';
+import TeamInfo from '../../components/TeamInfo/TeamInfo';
 import { getData } from '../../utils/fetch';
 
 const Team = props => {
@@ -31,23 +31,13 @@ const Team = props => {
     teamInfo = (
       <>
         <h3>Team info</h3>
-        <TeamLogo
-          crestUrl={team.crestUrl}
-          alt={`${team.name} Logo`}
-          width="200px"
-          height="200px"
+        <TeamInfo
+          teamCrestUrl={team.crestUrl}
+          teamName={team.name}
+          teamCountry={team.area.name}
+          teamVenue={team.venue}
+          teamWebsite={team.website}
         />
-        <h2>{team.name}</h2>
-        <br />
-        <p>
-          <strong>Country:</strong> {team.area.name}
-        </p>
-        <p>
-          <strong>Stadium:</strong> {team.venue}
-        </p>
-        <p>
-          <strong>Website:</strong> <a href={team.website}>{team.website}</a>
-        </p>
       </>
     );
   }
