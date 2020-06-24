@@ -11,15 +11,9 @@ const Competitions = props => {
   }, [setCompetitions]);
   return (
     <div className="container">
-      <CompetitionsGrid competitions={props.competitions} />
+      <CompetitionsGrid />
     </div>
   );
-};
-
-const mapStateToProps = state => {
-  return {
-    competitions: state.cmp.competitions,
-  };
 };
 
 const dispatchStateToProps = dispatch => {
@@ -28,4 +22,4 @@ const dispatchStateToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, dispatchStateToProps)(Competitions);
+export default connect(null, dispatchStateToProps)(Competitions);

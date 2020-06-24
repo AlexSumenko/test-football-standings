@@ -15,17 +15,11 @@ const Competition = props => {
     <div className="container">
       <div className="row">
         <div className="col-sm-12">
-          <CompetitionTable standings={props.competitionStandings} />
+          <CompetitionTable />
         </div>
       </div>
     </div>
   );
-};
-
-const mapStateToProps = state => {
-  return {
-    competitionStandings: state.std.competitionStandings,
-  };
 };
 
 const mapDispatchToProps = dispatch => {
@@ -35,4 +29,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Competition);
+export default connect(null, mapDispatchToProps)(Competition);

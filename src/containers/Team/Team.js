@@ -69,7 +69,6 @@ const Team = props => {
           />
           <hr />
           <FakePlayerAddForm
-            name={props.playerToAddValue}
             changed={event => setPlayerToAddValue(event.target.value)}
             clicked={playerName => addPlayerHandler(props.playerToAddValue)}
           />
