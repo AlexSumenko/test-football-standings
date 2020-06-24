@@ -13,6 +13,14 @@ const reducer = (state = initialState, action) => {
         team: action.team,
         playersFullList: action.playersFullList,
       };
+    case actionTypes.DELETE_PLAYER:
+      const newPlayersList = [...state.playersFullList].filter(
+        player => player.id !== action.playerId
+      );
+      return {
+        ...state,
+        playersFullList: newPlayersList,
+      };
     default:
       return state;
   }

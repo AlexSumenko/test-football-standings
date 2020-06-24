@@ -11,7 +11,7 @@ const Team = props => {
   const [searchValue, setSearchValue] = useState('');
   const [playerToAddValue, setPlayerToAddValue] = useState('');
   const [playersFilteredList, setPlayersFilteredList] = useState([]);
-  const { setTeam } = props;
+  const { setTeam, deletePlayer } = props;
   const teamId = props.match.params.id;
 
   useEffect(() => {
@@ -38,12 +38,6 @@ const Team = props => {
     setPlayerToAddValue('');
   };
 
-  const deletePlayerHandler = playerId => {
-    setPlayersFilteredList(
-      playersFilteredList.filter(player => player.id !== playerId)
-    );
-  };
-
   let teamInfo = <h3>Team info</h3>;
   if (props.team) {
     teamInfo = (
@@ -65,7 +59,7 @@ const Team = props => {
     squadInfo = (
       <TeamPlayersTable
         players={playersFilteredList}
-        deleted={playerId => deletePlayerHandler(playerId)}
+        deleted={playerId => deletePlayer(playerId)}
       />
     );
   }
@@ -106,6 +100,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setTeam: teamId => dispatch(actions.retrieveTeam(teamId)),
+    deletePlayer: playerId => dispatch(actions.deletePlayer(playerId)),
   };
 };
 

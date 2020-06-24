@@ -19,3 +19,10 @@ export const retrieveTeam = teamId => {
       .catch(err => console.log(err));
   };
 };
+
+export const deletePlayer = playerId => {
+  return {
+    type: actionTypes.DELETE_PLAYER,
+    playerId: playerId,
+  };
+};
