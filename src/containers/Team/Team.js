@@ -8,6 +8,7 @@ import { getData } from '../../utils/fetch';
 const Team = props => {
   const [team, setTeam] = useState(null);
   const [searchValue, setSearchValue] = useState('');
+  const [playerToAddValue, setPlayerToAddValue] = useState('');
   const [playersFilteredList, setPlayersFilteredList] = useState([]);
   const [playersFullList, setPlayersFullList] = useState([]);
   const teamId = props.match.params.id;
@@ -45,11 +46,22 @@ const Team = props => {
     );
   }
 
-  const deletePlayerHandler = playerId => {
-    const newPlayersList = playersFilteredList.filter(
-      player => player.id !== playerId
-    );
+  const addPlayerHandler = playerName => {
+    const newPlayersList = [...playersFilteredList];
+    newPlayersList.push({
+      id: Date.now(),
+      name: playerName,
+      dateOfBirth: '1992-03-04T00:00:00Z',
+      nationality: 'Test',
+      position: 'Test',
+    });
     setPlayersFilteredList(newPlayersList);
+  };
+
+  const deletePlayerHandler = playerId => {
+    setPlayersFilteredList(
+      playersFilteredList.filter(player => player.id !== playerId)
+    );
   };
 
   let squadInfo = <div className="text-info">Loading players...</div>;
@@ -73,6 +85,26 @@ const Team = props => {
             value={searchValue}
             changed={event => setSearchValue(event.target.value)}
           />
+          <hr />
+          <form>
+            <div className="form-group">
+              <input
+                style={{ minWidth: '100%' }}
+                type="text"
+                placeholder="Enter fake player name to simulate local state update"
+                value={playerToAddValue}
+                onChange={event => setPlayerToAddValue(event.target.value)}
+              />
+            </div>
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={playerName => addPlayerHandler(playerToAddValue)}
+            >
+              Add fake player
+            </button>
+          </form>
+          <hr />
           {squadInfo}
         </div>
       </div>

@@ -26,8 +26,8 @@ const teamPlayersTable = React.memo(props => {
                 <td>{player.nationality}</td>
                 <td>
                   <button
-                    type="button"
                     className="btn btn-primary"
+                    type="button"
                     onClick={props.deleted.bind(this, player.id)}
                   >
                     Delete
