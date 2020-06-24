@@ -1,36 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 import SearchField from '../../components/SearchField/SearchField';
 import FakePlayerAddForm from '../../components/FakePlayerAddForm/FakePlayerAddForm';
 import TeamPlayersTable from '../../components/Tables/TeamPlayersTable/TeamPlayersTable';
 import TeamInfo from '../../components/TeamInfo/TeamInfo';
-import { getData } from '../../utils/fetch';
 
 const Team = props => {
-  const [team, setTeam] = useState(null);
   const [searchValue, setSearchValue] = useState('');
   const [playerToAddValue, setPlayerToAddValue] = useState('');
   const [playersFilteredList, setPlayersFilteredList] = useState([]);
-  const [playersFullList, setPlayersFullList] = useState([]);
+  const { setTeam } = props;
   const teamId = props.match.params.id;
 
   useEffect(() => {
-    getData(`teams/${teamId}`)
-      .then(res => res.json())
-      .then(res => {
-        setTeam(res);
-        setPlayersFullList(res.squad);
-        setPlayersFilteredList(res.squad);
-      })
-      .catch(err => console.log(err));
-  }, [teamId]);
+    setTeam(teamId);
+  }, [setTeam, teamId]);
 
   useEffect(() => {
-    const playersList = [...playersFullList];
+    const playersList = [...props.playersFullList];
     setPlayersFilteredList(
       playersList.filter(player => player.name.includes(searchValue))
     );
-  }, [searchValue]);
+  }, [props.playersFullList, searchValue]);
 
   const addPlayerHandler = playerName => {
     const newPlayersList = [...playersFilteredList];
@@ -52,16 +45,16 @@ const Team = props => {
   };
 
   let teamInfo = <h3>Team info</h3>;
-  if (team) {
+  if (props.team) {
     teamInfo = (
       <>
         <h3>Team info</h3>
         <TeamInfo
-          teamCrestUrl={team.crestUrl}
-          teamName={team.name}
-          teamCountry={team.area.name}
-          teamVenue={team.venue}
-          teamWebsite={team.website}
+          teamCrestUrl={props.team.crestUrl}
+          teamName={props.team.name}
+          teamCountry={props.team.area.name}
+          teamVenue={props.team.venue}
+          teamWebsite={props.team.website}
         />
       </>
     );
@@ -103,4 +96,17 @@ const Team = props => {
   );
 };
 
-export default Team;
+const mapStateToProps = state => {
+  return {
+    team: state.team.team,
+    playersFullList: state.team.playersFullList,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setTeam: teamId => dispatch(actions.retrieveTeam(teamId)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Team);

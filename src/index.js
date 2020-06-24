@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 
 import competitionsReducer from './store/reducers/competitions';
 import standingsReducer from './store/reducers/competition';
+import teamReducer from './store/reducers/team';
 
 import './index.scss';
 import App from './App';
@@ -15,6 +16,7 @@ import * as serviceWorker from './serviceWorker';
 const rootReducer = combineReducers({
   cmp: competitionsReducer,
   std: standingsReducer,
+  team: teamReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
