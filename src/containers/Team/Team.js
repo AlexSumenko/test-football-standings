@@ -10,12 +10,21 @@ import TeamInfo from '../../components/TeamInfo/TeamInfo';
 const Team = props => {
   const [searchValue, setSearchValue] = useState('');
   const [playersFilteredList, setPlayersFilteredList] = useState([]);
-  const { setTeam, addPlayer, deletePlayer, setPlayerToAddValue } = props;
+  const {
+    setTeam,
+    addPlayer,
+    deletePlayer,
+    setPlayerToAddValue,
+    clearTeamInfo,
+  } = props;
   const teamId = props.match.params.id;
 
   useEffect(() => {
     setTeam(teamId);
-  }, [setTeam, teamId]);
+    return () => {
+      clearTeamInfo();
+    };
+  }, [setTeam, teamId, clearTeamInfo]);
 
   useEffect(() => {
     const playersList = [...props.playersFullList];
@@ -95,6 +104,7 @@ const mapDispatchToProps = dispatch => {
     deletePlayer: playerId => dispatch(actions.deletePlayer(playerId)),
     setPlayerToAddValue: playerToAdd =>
       dispatch(actions.setPlayerToAdd(playerToAdd)),
+    clearTeamInfo: () => dispatch(actions.clearTeam()),
   };
 };
 

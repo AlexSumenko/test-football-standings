@@ -11,6 +11,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         competitionStandings: action.competitionStandings,
       };
+    case actionTypes.CLEAR_STANDINGS:
+      return {
+        ...state,
+        competitionStandings: action.competitionStandings,
+      };
     default:
       return state;
   }

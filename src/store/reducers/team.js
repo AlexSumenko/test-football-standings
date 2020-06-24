@@ -40,6 +40,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         playerToAdd: action.playerToAddValue,
       };
+    case actionTypes.CLEAR_TEAM:
+      return {
+        ...state,
+        team: action.team,
+        playersFullList: action.playersFullList,
+      };
     default:
       return state;
   }

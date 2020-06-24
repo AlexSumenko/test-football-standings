@@ -5,11 +5,14 @@ import * as actions from '../../../store/actions/index';
 import CompetitionTable from '../../../components/Tables/CompetitionTable/CompetitionTable';
 
 const Competition = props => {
-  const { setCompetitionStandings } = props;
+  const { setCompetitionStandings, clearCompetitionStandings } = props;
   const competitionId = props.match.params.id;
   useEffect(() => {
     setCompetitionStandings(competitionId);
-  }, [setCompetitionStandings, competitionId]);
+    return () => {
+      clearCompetitionStandings();
+    };
+  }, [setCompetitionStandings, competitionId, clearCompetitionStandings]);
 
   return (
     <div className="container">
@@ -26,6 +29,7 @@ const mapDispatchToProps = dispatch => {
   return {
     setCompetitionStandings: competitionId =>
       dispatch(actions.retrieveStandings(competitionId)),
+    clearCompetitionStandings: () => dispatch(actions.clearStandings()),
   };
 };
 

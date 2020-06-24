@@ -40,3 +40,11 @@ export const setPlayerToAdd = playerToAdd => {
     playerToAddValue: playerToAdd,
   };
 };
+
+export const clearTeam = () => {
+  return {
+    type: actionTypes.CLEAR_TEAM,
+    team: null,
+    playersFullList: [],
+  };
+};

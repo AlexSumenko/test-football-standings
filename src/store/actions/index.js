@@ -1,5 +1,11 @@
 export { retrieveCompetitions } from './competitions';
 
-export { retrieveStandings } from './competition';
+export { retrieveStandings, clearStandings } from './competition';
 
-export { retrieveTeam, addPlayer, deletePlayer, setPlayerToAdd } from './team';
+export {
+  retrieveTeam,
+  addPlayer,
+  deletePlayer,
+  setPlayerToAdd,
+  clearTeam,
+} from './team';

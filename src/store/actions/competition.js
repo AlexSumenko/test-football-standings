@@ -18,3 +18,10 @@ export const retrieveStandings = competitionId => {
       .catch(err => console.log(err));
   };
 };
+
+export const clearStandings = () => {
+  return {
+    type: actionTypes.CLEAR_STANDINGS,
+    competitionStandings: [],
+  };
+};
