@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import TeamLogo from '../Tables/CompetitionTable/TeamLogo';
 
-const teamInfo = props => {
+const teamInfo = React.memo(props => {
   return (
     <>
       <TeamLogo
@@ -26,7 +26,7 @@ const teamInfo = props => {
       </p>
     </>
   );
-};
+});
 
 teamInfo.propTypes = {
   teamCrestUrl: PropTypes.string,
@@ -36,4 +36,4 @@ teamInfo.propTypes = {
   teamWebsite: PropTypes.string,
 };
 
-export default React.memo(teamInfo);
+export default teamInfo;

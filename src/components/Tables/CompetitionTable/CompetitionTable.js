@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import TeamLogo from './TeamLogo';
 import './CompetitionTable.scss';
 
-const competitionsTable = props => {
+const competitionsTable = React.memo(props => {
   const teamClickHandler = teamId => {
     props.history.push(`/teams/${teamId}`);
   };
@@ -64,10 +64,10 @@ const competitionsTable = props => {
     );
   }
   return <div className="table-responsive">{competitionStandings}</div>;
-};
+});
 
 competitionsTable.propTypes = {
   competitions: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default React.memo(withRouter(competitionsTable));
+export default withRouter(competitionsTable);

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const teamLogo = props => {
+const teamLogo = React.memo(props => {
   return (
     <img
       src={props.crestUrl}
@@ -10,7 +10,7 @@ const teamLogo = props => {
       height={props.height}
     />
   );
-};
+});
 
 teamLogo.propTypes = {
   crestUrl: PropTypes.string,
@@ -24,4 +24,4 @@ teamLogo.defaultProps = {
   height: '16px',
 };
 
-export default React.memo(teamLogo);
+export default teamLogo;

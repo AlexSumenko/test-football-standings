@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const searchField = props => {
+const searchField = React.memo(props => {
   return (
     <div className="form-group">
       <input
@@ -13,7 +13,7 @@ const searchField = props => {
       />
     </div>
   );
-};
+});
 
 searchField.propTypes = {
   type: PropTypes.string.isRequired,
@@ -28,4 +28,4 @@ searchField.defaultProps = {
   value: '',
 };
 
-export default React.memo(searchField);
+export default searchField;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import SearchField from '../../components/SearchField/SearchField';
 import TeamPlayersTable from '../../components/Tables/TeamPlayersTable/TeamPlayersTable';

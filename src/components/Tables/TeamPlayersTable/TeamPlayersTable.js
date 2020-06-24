@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { calculateAgeInYears } from '../../../utils/helpers';
 
-const teamPlayersTable = props => {
+const teamPlayersTable = React.memo(props => {
   let playersTable = <div className="text-info">Loading players...</div>;
   if (props.players && props.players.length > 0) {
     playersTable = (
@@ -41,10 +41,11 @@ const teamPlayersTable = props => {
     );
   }
   return <div className="table-responsive">{playersTable}</div>;
-};
+});
 
 teamPlayersTable.propTypes = {
   players: PropTypes.arrayOf(PropTypes.object),
+  deleted: PropTypes.func.isRequired,
 };
 
-export default React.memo(teamPlayersTable);
+export default teamPlayersTable;

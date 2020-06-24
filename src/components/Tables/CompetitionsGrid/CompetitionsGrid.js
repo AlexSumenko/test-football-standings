@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const competitionsGrid = props => {
+const competitionsGrid = React.memo(props => {
   let grid = <div className="text-info">Loading competitions...</div>;
   if (props.competitions && props.competitions.length > 0) {
     grid = props.competitions.map(competition => {
@@ -17,10 +17,10 @@ const competitionsGrid = props => {
     });
   }
   return <div className="card-columns">{grid}</div>;
-};
+});
 
 competitionsGrid.propTypes = {
   competitions: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default React.memo(competitionsGrid);
+export default competitionsGrid;
