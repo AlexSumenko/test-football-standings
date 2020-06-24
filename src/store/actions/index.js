@@ -1,0 +1,1 @@
+export { retrieveCompetitions } from './competitions';
