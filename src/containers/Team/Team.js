@@ -8,20 +8,23 @@ import { getData } from '../../utils/fetch';
 const Team = props => {
   const [team, setTeam] = useState(null);
   const [searchValue, setSearchValue] = useState('');
-  const [playersList, setPlayersList] = useState([]);
+  const [playersFilteredList, setPlayersFilteredList] = useState([]);
+  const [playersFullList, setPlayersFullList] = useState([]);
   const teamId = props.match.params.id;
   useEffect(() => {
     getData(`teams/${teamId}`)
       .then(res => res.json())
       .then(res => {
         setTeam(res);
-        setPlayersList(res.squad);
+        setPlayersFullList(res.squad);
+        setPlayersFilteredList(res.squad);
       })
       .catch(err => console.log(err));
   }, [teamId]);
 
   useEffect(() => {
-    setPlayersList(
+    const playersList = [...playersFullList];
+    setPlayersFilteredList(
       playersList.filter(player => player.name.includes(searchValue))
     );
   }, [searchValue]);
@@ -43,8 +46,8 @@ const Team = props => {
   }
 
   let squadInfo = <div className="text-info">Loading players...</div>;
-  if (playersList) {
-    squadInfo = <TeamPlayersTable players={playersList} />;
+  if (playersFilteredList) {
+    squadInfo = <TeamPlayersTable players={playersFilteredList} />;
   }
   return (
     <div className="Container">
