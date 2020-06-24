@@ -13,6 +13,7 @@ const teamPlayersTable = props => {
             <th>Role</th>
             <th>Age</th>
             <th>Nationality</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -23,6 +24,15 @@ const teamPlayersTable = props => {
                 <td>{player.position ? player.position : player.role}</td>
                 <td>{calculateAgeInYears(player.dateOfBirth)}</td>
                 <td>{player.nationality}</td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={props.deleted.bind(this, player.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
               </tr>
             );
           })}

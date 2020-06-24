@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import SearchField from '../../components/SearchField/SearchField';
 import TeamPlayersTable from '../../components/Tables/TeamPlayersTable/TeamPlayersTable';
@@ -45,15 +45,27 @@ const Team = props => {
     );
   }
 
+  const deletePlayerHandler = playerId => {
+    const newPlayersList = playersFilteredList.filter(
+      player => player.id !== playerId
+    );
+    setPlayersFilteredList(newPlayersList);
+  };
+
   let squadInfo = <div className="text-info">Loading players...</div>;
   if (playersFilteredList) {
-    squadInfo = <TeamPlayersTable players={playersFilteredList} />;
+    squadInfo = (
+      <TeamPlayersTable
+        players={playersFilteredList}
+        deleted={playerId => deletePlayerHandler(playerId)}
+      />
+    );
   }
   return (
     <div className="Container">
       <div className="row">
-        <div className="col-sm-4">{teamInfo}</div>
-        <div className="col-sm-7">
+        <div className="col-sm-3">{teamInfo}</div>
+        <div className="col-sm-8">
           <h3>Players</h3>
           <SearchField
             type="text"
