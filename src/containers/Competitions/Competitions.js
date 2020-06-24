@@ -18,7 +18,7 @@ const Competitions = props => {
 
 const mapStateToProps = state => {
   return {
-    competitions: state.competitions,
+    competitions: state.cmp.competitions,
   };
 };
 

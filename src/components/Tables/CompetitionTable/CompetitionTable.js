@@ -47,7 +47,7 @@ const competitionsTable = React.memo(props => {
                     width="16px"
                     height="16px"
                   />
-                  {team.team.name}
+                  {`  ${team.team.name}`}
                 </td>
                 <td>{team.playedGames}</td>
                 <td>{team.won}</td>
