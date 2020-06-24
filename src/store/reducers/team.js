@@ -3,6 +3,7 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   team: null,
   playersFullList: [],
+  playerToAdd: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,6 +34,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         playersFullList: newPlayers,
+      };
+    case actionTypes.SET_PLAYER_TO_ADD_VALUE:
+      return {
+        ...state,
+        playerToAdd: action.playerToAddValue,
       };
     default:
       return state;

@@ -33,3 +33,10 @@ export const addPlayer = playerName => {
     playerName: playerName,
   };
 };
+
+export const setPlayerToAdd = playerToAdd => {
+  return {
+    type: actionTypes.SET_PLAYER_TO_ADD_VALUE,
+    playerToAddValue: playerToAdd,
+  };
+};
