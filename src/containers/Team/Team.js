@@ -11,7 +11,7 @@ const Team = props => {
   const [searchValue, setSearchValue] = useState('');
   const [playerToAddValue, setPlayerToAddValue] = useState('');
   const [playersFilteredList, setPlayersFilteredList] = useState([]);
-  const { setTeam, deletePlayer } = props;
+  const { setTeam, addPlayer, deletePlayer } = props;
   const teamId = props.match.params.id;
 
   useEffect(() => {
@@ -26,15 +26,6 @@ const Team = props => {
   }, [props.playersFullList, searchValue]);
 
   const addPlayerHandler = playerName => {
-    const newPlayersList = [...playersFilteredList];
-    newPlayersList.push({
-      id: Date.now(),
-      name: playerName,
-      dateOfBirth: '1992-03-04T00:00:00Z',
-      nationality: 'Test',
-      position: 'Test',
-    });
-    setPlayersFilteredList(newPlayersList);
     setPlayerToAddValue('');
   };
 
@@ -80,7 +71,7 @@ const Team = props => {
           <FakePlayerAddForm
             name={playerToAddValue}
             changed={event => setPlayerToAddValue(event.target.value)}
-            clicked={playerName => addPlayerHandler(playerToAddValue)}
+            clicked={playerName => addPlayer(playerToAddValue)}
           />
           <hr />
           {squadInfo}
@@ -100,6 +91,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     setTeam: teamId => dispatch(actions.retrieveTeam(teamId)),
+    addPlayer: playerName => dispatch(actions.addPlayer(playerName)),
     deletePlayer: playerId => dispatch(actions.deletePlayer(playerId)),
   };
 };

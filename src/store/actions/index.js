@@ -2,4 +2,4 @@ export { retrieveCompetitions } from './competitions';
 
 export { retrieveStandings } from './competition';
 
-export { retrieveTeam, deletePlayer } from './team';
+export { retrieveTeam, addPlayer, deletePlayer } from './team';

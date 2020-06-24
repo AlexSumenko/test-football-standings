@@ -26,3 +26,10 @@ export const deletePlayer = playerId => {
     playerId: playerId,
   };
 };
+
+export const addPlayer = playerName => {
+  return {
+    type: actionTypes.ADD_PLAYER,
+    playerName: playerName,
+  };
+};
