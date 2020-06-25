@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { getDataWithSubscriptionPlan } from '../../utils/fetch';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 import CompetitionsGrid from '../../components/Tables/CompetitionsGrid/CompetitionsGrid';
 
-const Competitions = () => {
-  const [competitions, setCompetitions] = useState([]);
+const Competitions = props => {
+  const { setCompetitions } = props;
   useEffect(() => {
-    getDataWithSubscriptionPlan('competitions/')
-      .then(res => res.json())
-      .then(res => {
-        setCompetitions(res.competitions);
-      })
-      .catch(err => console.log(err));
-  }, []);
+    setCompetitions();
+  }, [setCompetitions]);
   return (
     <div className="container">
-      <CompetitionsGrid competitions={competitions} />
+      <CompetitionsGrid />
     </div>
   );
 };
 
-export default Competitions;
+const dispatchStateToProps = dispatch => {
+  return {
+    setCompetitions: () => dispatch(actions.retrieveCompetitions()),
+  };
+};
+
+export default connect(null, dispatchStateToProps)(Competitions);

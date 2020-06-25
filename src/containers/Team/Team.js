@@ -1,67 +1,54 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions/index';
 
 import SearchField from '../../components/SearchField/SearchField';
 import FakePlayerAddForm from '../../components/FakePlayerAddForm/FakePlayerAddForm';
 import TeamPlayersTable from '../../components/Tables/TeamPlayersTable/TeamPlayersTable';
 import TeamInfo from '../../components/TeamInfo/TeamInfo';
-import { getData } from '../../utils/fetch';
 
 const Team = props => {
-  const [team, setTeam] = useState(null);
   const [searchValue, setSearchValue] = useState('');
-  const [playerToAddValue, setPlayerToAddValue] = useState('');
   const [playersFilteredList, setPlayersFilteredList] = useState([]);
-  const [playersFullList, setPlayersFullList] = useState([]);
+  const {
+    setTeam,
+    addPlayer,
+    deletePlayer,
+    setPlayerToAddValue,
+    clearTeamInfo,
+  } = props;
   const teamId = props.match.params.id;
 
   useEffect(() => {
-    getData(`teams/${teamId}`)
-      .then(res => res.json())
-      .then(res => {
-        setTeam(res);
-        setPlayersFullList(res.squad);
-        setPlayersFilteredList(res.squad);
-      })
-      .catch(err => console.log(err));
-  }, [teamId]);
+    setTeam(teamId);
+    return () => {
+      clearTeamInfo();
+    };
+  }, [setTeam, teamId, clearTeamInfo]);
 
   useEffect(() => {
-    const playersList = [...playersFullList];
+    const playersList = [...props.playersFullList];
     setPlayersFilteredList(
       playersList.filter(player => player.name.includes(searchValue))
     );
-  }, [searchValue]);
+  }, [props.playersFullList, searchValue]);
 
   const addPlayerHandler = playerName => {
-    const newPlayersList = [...playersFilteredList];
-    newPlayersList.push({
-      id: Date.now(),
-      name: playerName,
-      dateOfBirth: '1992-03-04T00:00:00Z',
-      nationality: 'Test',
-      position: 'Test',
-    });
-    setPlayersFilteredList(newPlayersList);
+    addPlayer(playerName);
     setPlayerToAddValue('');
   };
 
-  const deletePlayerHandler = playerId => {
-    setPlayersFilteredList(
-      playersFilteredList.filter(player => player.id !== playerId)
-    );
-  };
-
   let teamInfo = <h3>Team info</h3>;
-  if (team) {
+  if (props.team) {
     teamInfo = (
       <>
         <h3>Team info</h3>
         <TeamInfo
-          teamCrestUrl={team.crestUrl}
-          teamName={team.name}
-          teamCountry={team.area.name}
-          teamVenue={team.venue}
-          teamWebsite={team.website}
+          teamCrestUrl={props.team.crestUrl}
+          teamName={props.team.name}
+          teamCountry={props.team.area.name}
+          teamVenue={props.team.venue}
+          teamWebsite={props.team.website}
         />
       </>
     );
@@ -72,7 +59,7 @@ const Team = props => {
     squadInfo = (
       <TeamPlayersTable
         players={playersFilteredList}
-        deleted={playerId => deletePlayerHandler(playerId)}
+        deleted={playerId => deletePlayer(playerId)}
       />
     );
   }
@@ -91,9 +78,8 @@ const Team = props => {
           />
           <hr />
           <FakePlayerAddForm
-            name={playerToAddValue}
             changed={event => setPlayerToAddValue(event.target.value)}
-            clicked={playerName => addPlayerHandler(playerToAddValue)}
+            clicked={playerName => addPlayerHandler(props.playerToAddValue)}
           />
           <hr />
           {squadInfo}
@@ -103,4 +89,23 @@ const Team = props => {
   );
 };
 
-export default Team;
+const mapStateToProps = state => {
+  return {
+    team: state.team.team,
+    playersFullList: state.team.playersFullList,
+    playerToAddValue: state.team.playerToAdd,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    setTeam: teamId => dispatch(actions.retrieveTeam(teamId)),
+    addPlayer: playerName => dispatch(actions.addPlayer(playerName)),
+    deletePlayer: playerId => dispatch(actions.deletePlayer(playerId)),
+    setPlayerToAddValue: playerToAdd =>
+      dispatch(actions.setPlayerToAdd(playerToAdd)),
+    clearTeamInfo: () => dispatch(actions.clearTeam()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Team);

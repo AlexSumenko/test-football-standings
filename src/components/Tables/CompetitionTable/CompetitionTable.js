@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import TeamLogo from './TeamLogo';
@@ -47,7 +48,7 @@ const competitionsTable = React.memo(props => {
                     width="16px"
                     height="16px"
                   />
-                  {team.team.name}
+                  {`  ${team.team.name}`}
                 </td>
                 <td>{team.playedGames}</td>
                 <td>{team.won}</td>
@@ -70,4 +71,10 @@ competitionsTable.propTypes = {
   competitions: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default withRouter(competitionsTable);
+const mapStateToProps = state => {
+  return {
+    standings: state.std.competitionStandings,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(competitionsTable));

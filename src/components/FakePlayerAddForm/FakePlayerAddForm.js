@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 const fakePlayerAddForm = React.memo(props => (
@@ -24,4 +25,10 @@ fakePlayerAddForm.propTypes = {
   clicked: PropTypes.func,
 };
 
-export default fakePlayerAddForm;
+const mapStateToProps = state => {
+  return {
+    name: state.team.playerToAdd,
+  };
+};
+
+export default connect(mapStateToProps)(fakePlayerAddForm);

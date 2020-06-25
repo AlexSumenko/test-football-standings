@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -23,4 +24,10 @@ competitionsGrid.propTypes = {
   competitions: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default competitionsGrid;
+const mapStateToProps = state => {
+  return {
+    competitions: state.cmp.competitions,
+  };
+};
+
+export default connect(mapStateToProps)(competitionsGrid);

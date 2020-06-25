@@ -1,29 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions/index';
 
 import CompetitionTable from '../../../components/Tables/CompetitionTable/CompetitionTable';
 
-import { getData } from '../../../utils/fetch';
-
 const Competition = props => {
-  const [competitionStandings, setCompetitionStandings] = useState([]);
+  const { setCompetitionStandings, clearCompetitionStandings } = props;
   const competitionId = props.match.params.id;
   useEffect(() => {
-    getData(`competitions/${competitionId}/standings`)
-      .then(res => res.json())
-      .then(res => {
-        setCompetitionStandings(res.standings[0].table);
-      })
-      .catch(err => console.log(err));
-  }, [competitionId]);
+    setCompetitionStandings(competitionId);
+    return () => {
+      clearCompetitionStandings();
+    };
+  }, [setCompetitionStandings, competitionId, clearCompetitionStandings]);
+
   return (
     <div className="container">
       <div className="row">
         <div className="col-sm-12">
-          <CompetitionTable standings={competitionStandings} />
+          <CompetitionTable />
         </div>
       </div>
     </div>
   );
 };
 
-export default Competition;
+const mapDispatchToProps = dispatch => {
+  return {
+    setCompetitionStandings: competitionId =>
+      dispatch(actions.retrieveStandings(competitionId)),
+    clearCompetitionStandings: () => dispatch(actions.clearStandings()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Competition);
